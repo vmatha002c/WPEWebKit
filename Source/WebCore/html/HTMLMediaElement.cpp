@@ -3259,7 +3259,7 @@ void HTMLMediaElement::pauseInternal()
 
     if (!m_paused) {
         m_paused = true;
-        scheduleTimeupdateEvent(false);
+        // scheduleTimeupdateEvent(false);
         scheduleEvent(eventNames().pauseEvent);
         rejectPendingPlayPromises(DOMError::create("AbortError", "The operation was aborted."));
 
@@ -3580,7 +3580,8 @@ void HTMLMediaElement::playbackProgressTimerFired()
         }
     }
     
-    scheduleTimeupdateEvent(true);
+    if (!m_player->seeking())
+        scheduleTimeupdateEvent(true);
 
     if (!requestedPlaybackRate())
         return;
