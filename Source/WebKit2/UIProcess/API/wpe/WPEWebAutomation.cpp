@@ -34,7 +34,7 @@ namespace WKWPE {
 
 WebAutomation::WebAutomation()
     : m_commandStatusCallback(nullptr) {
-#if 0
+#if 1
     m_webAutomationSession.reset(new WebKit::WebAutomationSession());
     if (m_webAutomationSession) {
         m_webAutomationSession->connect((Inspector::FrontendChannel*) this, true);
@@ -44,7 +44,7 @@ WebAutomation::WebAutomation()
 }
 
 WebAutomation::~WebAutomation() {
-#if 0
+#if 1
     if (m_webAutomationSession) {
         m_webAutomationSession->disconnect((Inspector::FrontendChannel*) this);	
         m_webAutomationSession.reset();
@@ -59,7 +59,7 @@ WebAutomation* WebAutomation::create() {
 
 void WebAutomation::setProcessPool(WebKit::WebProcessPool* processPool) 
 {
-#if 0
+#if 1
     //Link Process Pool and Automation Session together
     if (m_webAutomationSession)
         processPool->setAutomationSession(m_webAutomationSession.get());
@@ -68,7 +68,7 @@ void WebAutomation::setProcessPool(WebKit::WebProcessPool* processPool)
 
 void WebAutomation::setSessionIdentifier(const String& sessionIdentifier)
 {
-#if 0
+#if 1
     if (m_webAutomationSession)
         m_webAutomationSession->setSessionIdentifier(sessionIdentifier);
 #endif
@@ -77,7 +77,7 @@ void WebAutomation::setSessionIdentifier(const String& sessionIdentifier)
 //void (*s_commandStatusCallback)(WKStringRef rspMsg);
 
 void WebAutomation::sendMessageToTarget(const String& command, void (*commandCallback)(WKStringRef rspMsg)) {
-#if 0
+#if 1
     if (m_webAutomationSession) {
         m_commandStatusCallback = commandCallback;
         m_webAutomationSession->dispatchMessageFromRemote(command);
@@ -86,7 +86,7 @@ void WebAutomation::sendMessageToTarget(const String& command, void (*commandCal
 }
 
 void WebAutomation::sendMessageToFrontend(const String& rspMsg) {
-#if 0
+#if 1
     if (m_commandStatusCallback) {
         m_commandStatusCallback (WebKit::toAPI(API::String::create(rspMsg).ptr()));
         return true;
